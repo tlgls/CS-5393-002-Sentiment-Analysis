@@ -8,7 +8,12 @@
 #ifndef DSSTRING_H
 #define DSSTRING_H
 
+#include <vector>
+#include <exception>
+
 #include <iostream>
+
+using namespace std;
 
 class DSString
 {
@@ -38,6 +43,7 @@ public:
     size_t length() const; // returns the length of the string
 
     char &operator[](size_t); // returns a reference to the character at the given index
+    char &operator[](size_t) const;
 
     /**
      * Overloaded operator+ which appends the string in the argument to this string
@@ -90,6 +96,14 @@ public:
     // you may want to add a find(...) function that will search for a
     // substring within a string or a function that breaks a string into words.
     // You will need a split or tokenize function.
+    std::vector<DSString> tokenize(DSString); // breaks tweet into separate words
+
+
+    // getline function to take in DSStrings
+    friend std::istream& getline(std::iostream &in, DSString &str);
+
+    // takes in DSStrings that also accounts for delimiter
+    friend std::istream& getline(std::istream &in, DSString &str, char delimiter);
 };
 
 #endif
